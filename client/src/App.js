@@ -6,10 +6,15 @@ import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import socketClient  from "socket.io-client";
+
+
+const SERVER = "http://127.0.0.1:8080";
 
 import "./App.css";
 
 function App() {
+  var socket = socketClient (SERVER);
   const [loggedIn, setLoggedIn] = React.useState(localStorage.getItem("user"));
 
   return (

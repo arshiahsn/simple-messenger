@@ -82,7 +82,11 @@ router.post(
     }
 );
 
-
+/**
+ * @method - POST
+ * @param - /login
+ * @description - User Login
+ */
 router.post(
     "/login",
     [
@@ -144,6 +148,12 @@ router.post(
     }
   );
 
+
+  /**
+ * @method - POST
+ * @param - /me
+ * @description - Return current user
+ */
 router.get("/me", auth, async (req, res) => {
 try {
     // request.user is getting fetched from Middleware after token authentication

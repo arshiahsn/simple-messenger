@@ -86,7 +86,7 @@ router.post(
 router.post(
     "/login",
     [
-      check("username", "Please enter a valid username"),
+      check("email", "Please enter a valid username").isEmail(),
       check("password", "Please enter a valid password").isLength({
         min: 6
       })
@@ -100,10 +100,10 @@ router.post(
         });
       }
   
-      const { username, password } = req.body;
+      const { email, password } = req.body;
       try {
         let user = await User.findOne({
-          username
+          email
         });
         if (!user)
           return res.status(400).json({

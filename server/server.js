@@ -8,7 +8,7 @@ const user = require("./routes/user");
 
 
 
-const PORT = 8080;
+const PORT = 3001;
 
 
 require('./models/User');
@@ -22,7 +22,7 @@ InitiateMongoServer();
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
-app.use("/", user);
+app.use("/auth", user);
 
 
 //require('./routes/authRoutes')(app);

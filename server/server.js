@@ -7,6 +7,7 @@ const InitiateMongoServer = require("./config/db");
 const user = require("./routes/user");
 
 
+
 const PORT = 8080;
 
 
@@ -22,6 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
 app.use("/", user);
+
 
 //require('./routes/authRoutes')(app);
 

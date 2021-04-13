@@ -5,14 +5,14 @@ var http = require('http').createServer(app);
 const bodyParser = require("body-parser");
 const InitiateMongoServer = require("./config/db");
 const user = require("./routes/user");
-
+require('dotenv').config()
 
 
 const PORT = 3001;
 
 
 require('./models/User');
-//require('./services/passport');
+
 
 // Initiate Mongo Server
 InitiateMongoServer();
@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 app.use("/auth", user);
 
 
-//require('./routes/authRoutes')(app);
 
 
 

@@ -26,9 +26,7 @@ router.post(
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array()
-            });
+            return res.send(400,errors.array);
         }
 
         const {
@@ -41,9 +39,7 @@ router.post(
                 email
             });
             if (user) {
-                return res.status(400).json({
-                    msg: "User Already Exists"
-                });
+                return res.send(400,'User Already Exists');
             }
 
             user = new User({
@@ -77,7 +73,7 @@ router.post(
             );
         } catch (err) {
             console.log(err.message);
-            res.status(500).send("Error in Saving");
+            res.send(500,'Error in Saving');
         }
     }
 );

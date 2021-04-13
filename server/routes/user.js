@@ -66,9 +66,10 @@ router.post(
                 },
                 (err, token) => {
                     if (err) throw err;
-                    res.status(200).json({
+                    res.status(201).json({
                         token
                     });
+                    res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
                 }
             );
         } catch (err) {

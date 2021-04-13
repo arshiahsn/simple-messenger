@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const User = require("../models/User");
+const validReq = require("../middleware/validReq");
 
 /**
  * @method - POST
@@ -24,10 +25,8 @@ router.post(
         })
     ],
     async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.send(400, errors.array);
-        }
+      //Validate request, otherwise send error
+        validReq.validate(req);
 
         const {
             username,
@@ -92,12 +91,9 @@ router.post(
       })
     ],
     async (req, res) => {
-      const errors = validationResult(req);
-  
-      if (!errors.isEmpty()) {
-        return res.send(400, errors.array());
-      }
-  
+      //Validate request, otherwise send error
+      validReq.validate(req);
+
       const { email, password } = req.body;
       try {
         let user = await User.findOne({

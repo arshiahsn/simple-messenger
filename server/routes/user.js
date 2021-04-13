@@ -6,6 +6,7 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const User = require("../models/User");
 const validReq = require("../middleware/validReq");
+const sign = require("../utility/sign");
 const JWTSECRET = process.env.JWT_SECRET;
 
 /**
@@ -59,19 +60,7 @@ router.post(
                 }
             };
 
-            jwt.sign(
-                payload,
-                JWTSECRET, {
-                    expiresIn: 10000
-                },
-                (err, token) => {
-                    if (err) throw err;
-                    res.status(201).json({
-                        token
-                    });
-                    res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
-                }
-            );
+            sign.sign(payload);
         } catch (err) {
             console.log(err.message);
             res.send(500,'Error in Saving');
@@ -87,10 +76,7 @@ router.post(
 router.post(
     "/login",
     [
-      check("email", "Please enter a valid username").isEmail(),
-      check("password", "Please enter a valid password").isLength({
-        min: 6
-      })
+      check("email", "Please enter a valid username").isEmail()
     ],
     async (req, res) => {
       //Validate request, otherwise send error
@@ -102,11 +88,11 @@ router.post(
           email
         });
         if (!user)
-          return res.send(400, 'User Not Exist');
+          return res.send(400, 'Wrong Credentials!');
   
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch)
-          return res.send(400, 'Incorrect Password !');
+          return res.send(400, 'Wrong Credentials!');
   
         const payload = {
           user: {
@@ -114,19 +100,7 @@ router.post(
           }
         };
   
-        jwt.sign(
-          payload,
-          "randomString",
-          {
-            expiresIn: 3600
-          },
-          (err, token) => {
-            if (err) throw err;
-            res.status(200).json({
-              token
-            });
-          }
-        );
+        sign.sign(payload);
       } catch (e) {
         console.error(e);
         res.send(500, 'Server Error');

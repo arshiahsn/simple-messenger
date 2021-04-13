@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
+const keys = require("./keys");
+
 
 // Replace this with your MONGOURI.
-const MONGOURI = "mongodb+srv://arshiahsn:arshiahsn7192!@cluster0.rznth.mongodb.net/myDatabase?retryWrites=true&w=majority";
+const MONGOURI = keys.mongoURI;
 
 const InitiateMongoServer = async () => {
   try {

@@ -107,17 +107,18 @@ router.post(
   );
 
 
-  /**
- * @method - POST
- * @param - /me
- * @description - Return current user
+/**
+   * @method - POST
+   * @param - /me
+   * @description - Return current user
  */
 router.get("/me", auth, async (req, res) => {
 try {
     // request.user is getting fetched from Middleware after token authentication
     const user = await User.findById(req.user.id);
-    res.json(user);
-} catch (e) {
+    const safeUser = (({username, email}) => ({username, email}))(user);
+    res.json(safeUser);
+} catch (e) {sj
     res.send(500, 'Server Error');
 }
 });

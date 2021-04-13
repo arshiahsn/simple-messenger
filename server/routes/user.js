@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const User = require("../models/User");
-const validReq = require("../middleware/validReq");
+const validateReq = require("../middleware/validReq");
 const sign = require("../utility/sign");
-const JWTSECRET = process.env.JWT_SECRET;
+
 
 /**
  * @method - POST
@@ -26,10 +26,9 @@ router.post(
             min: 6
         })
     ],
+    validateReq,
     async (req, res) => {
       //Validate request, otherwise send error
-        validReq.validate(req);
-
         const {
             username,
             email,
@@ -78,10 +77,9 @@ router.post(
     [
       check("email", "Please enter a valid username").isEmail()
     ],
+    validateReq,
     async (req, res) => {
       //Validate request, otherwise send error
-      validReq.validate(req);
-
       const { email, password } = req.body;
       try {
         let user = await User.findOne({
@@ -120,7 +118,7 @@ try {
     const user = await User.findById(req.user.id);
     res.json(user);
 } catch (e) {
-    res.send({ message: "Error in Fetching user" });
+    res.send(500, 'Server Error');
 }
 });
 

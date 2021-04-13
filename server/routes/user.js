@@ -6,6 +6,7 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const User = require("../models/User");
 const validReq = require("../middleware/validReq");
+const JWTSECRET = process.env.JWT_SECRET;
 
 /**
  * @method - POST
@@ -20,7 +21,7 @@ router.post(
         .not()
         .isEmpty(),
         check("email", "Please enter a valid email").isEmail(),
-        check("password", "Please enter a valid password").isLength({
+        check("password", "The password should be more than 6 characters").isLength({
             min: 6
         })
     ],
@@ -60,7 +61,7 @@ router.post(
 
             jwt.sign(
                 payload,
-                "randomString", {
+                JWTSECRET, {
                     expiresIn: 10000
                 },
                 (err, token) => {

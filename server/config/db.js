@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
-const db = require('db')
-db.connect({
-  mongoURI: process.env.DB_URI
-})
-// Replace this with your MONGOURI.
-const MONGOURI = mongoURI;
+const MONGOURI = process.env.DB_URI;
 
 const InitiateMongoServer = async () => {
   try {

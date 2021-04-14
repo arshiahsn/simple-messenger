@@ -7,11 +7,11 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import socketClient  from "socket.io-client";
-
+import "./App.css";
 
 const SERVER = "http://127.0.0.1:8080";
 
-import "./App.css";
+
 
 function App() {
   var socket = socketClient (SERVER);

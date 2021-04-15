@@ -118,7 +118,7 @@ try {
     const user = await User.findById(req.user.id);
     const safeUser = (({username, email}) => ({username, email}))(user);
     res.json(safeUser);
-} catch (e) {sj
+} catch (e) {
     res.send(500, 'Server Error');
 }
 });

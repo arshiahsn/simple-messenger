@@ -75,7 +75,7 @@ router.post(
 router.post(
     "/login",
     [
-      check("email", "Please enter a valid username").isEmail()
+      check("email", "Please enter a valid email").isEmail()
     ],
     validateReq,
     async (req, res) => {

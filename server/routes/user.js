@@ -36,7 +36,8 @@ router.post(
         } = req.body;
         try {
             let user = await User.findOne({
-                email
+              username: username, 
+              email: email
             });
             if (user) {
                 return res.send(400,'User Already Exists');

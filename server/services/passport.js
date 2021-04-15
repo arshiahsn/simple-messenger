@@ -1,7 +1,7 @@
-var passport = require('passport')
+const passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 
 

@@ -128,7 +128,7 @@ function useRegister() {
       `/auth/signup?username=${username}&email=${email}&password=${password}`
     , requestOptions).then(res => res.json());
     console.log(res);
-    localStorage.setItem("user", res.user);
+    localStorage.setItem("user", res.user.username);
     localStorage.setItem("token", res.token);
     history.push("/dashboard");
   };

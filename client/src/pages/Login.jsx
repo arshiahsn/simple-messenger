@@ -124,9 +124,12 @@ function useLogin() {
 
   const login = async (email, password) => {
     console.log(email, password);
+    const requestOptions = {
+      method: 'POST'
+    };
     const res = await fetch(
       `/auth/login?email=${email}&password=${password}`
-    ).then(res => res.json());
+    , requestOptions).then(res => res.json());
     localStorage.setItem("user", res.user);
     localStorage.setItem("token", res.token);
     history.push("/dashboard");

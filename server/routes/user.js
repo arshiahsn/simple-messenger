@@ -29,16 +29,15 @@ router.post(
     validateReq,
     async (req, res) => {
       //Validate request, otherwise send error
-        const {
-            username,
-            email,
-            password
-        } = req.body;
+        const username = req.query.username;
+        const email = req.query.email;
+        const password = req.query.password;
         try {
             let user = await User.findOne({
-              username: username, 
-              email: email
+              'username': username, 
+              'email': email
             });
+            
             if (user) {
                 return res.send(400,'User Already Exists');
             }
@@ -48,7 +47,6 @@ router.post(
                 email,
                 password
             });
-
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
 
@@ -60,7 +58,9 @@ router.post(
                 }
             };
 
-            sign.sign(payload);
+        //TODO: Change the token to a cookie
+        token = sign.sign(payload);
+        res.status(201).json({token: token, user: user});
         } catch (err) {
             console.log(err.message);
             res.send(500,'Error in Saving');
@@ -81,10 +81,11 @@ router.post(
     validateReq,
     async (req, res) => {
       //Validate request, otherwise send error
-      const { email, password } = req.body;
+      const email = req.query.email;
+      const password = req.query.password;
       try {
         let user = await User.findOne({
-          email
+          'email': email
         });
         if (!user)
           return res.send(400, 'Wrong Credentials!');
@@ -98,8 +99,9 @@ router.post(
             id: user.id
           }
         };
-  
-        sign.sign(payload);
+        //TODO: Change the token to a cookie
+        token = sign.sign(payload);
+        res.status(200).json({token: token, user: user});
       } catch (e) {
         console.error(e);
         res.send(500, 'Server Error');

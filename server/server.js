@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 var http = require('http').createServer(app);
 const bodyParser = require("body-parser");
+require('dotenv').config();
 const InitiateMongoServer = require("./config/db");
 const user = require("./routes/user");
-require('dotenv').config()
+
 
 
 const PORT = 3001;

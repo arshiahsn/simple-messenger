@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -14,6 +14,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import UserContext from "../UserContext";
+import UseRegister from "../middleware/signupMiddleware";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -116,27 +118,14 @@ const useStyles = makeStyles(theme => ({
   link: { textDecoration: "none", display: "flex", flexWrap: "nowrap" }
 }));
 
-function useRegister() {
-  const history = useHistory();
 
-  const login = async (username, email, password) => {
-    console.log(email, password);
-    const res = await fetch(
-      `/auth/signup?username=${username}&email=${email}&password=${password}`
-    ).then(res => res.json());
-    console.log(res);
-    localStorage.setItem("user", res.user);
-    localStorage.setItem("token", res.token);
-    history.push("/dashboard");
-  };
-  return login;
-}
 
 export default function Register() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-
-  const register = useRegister();
+  const { object, setObject } = useContext(UserContext);
+  const register = UseRegister();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
@@ -146,9 +135,10 @@ export default function Register() {
   const history = useHistory();
 
   React.useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) history.push("/dashboard");
+    const user = object.user;
+    if (user != null) history.push("/dashboard");
   }, []);
+  
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -219,7 +209,6 @@ export default function Register() {
                 register(username, email, password).then(
                   () => {
                     // useHistory push to chat
-                    console.log(email, password);
                     return;
                   },
                   error => {

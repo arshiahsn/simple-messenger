@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -14,6 +14,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import UserContext from "../UserContext";
+import UseLogin from "../middleware/loginMiddleware"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -118,40 +120,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// Login middleware placeholder
-function useLogin() {
-  const history = useHistory();
 
-  const login = async (email, password) => {
-    console.log(email, password);
-    const res = await fetch(
-      `/auth/login?email=${email}&password=${password}`
-    ).then(res => res.json());
-    localStorage.setItem("user", res.user);
-    localStorage.setItem("token", res.token);
-    history.push("/dashboard");
-  };
-  return login;
-}
+// Login middleware placeholder
+
+
 
 export default function Login() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-
+  const { object, setObject } = useContext(UserContext);
   const history = useHistory();
 
   React.useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) history.push("/dashboard");
+    const user = object.user;
+    if (user != null) history.push("/dashboard");
   }, []);
 
-  const login = useLogin();
-
+  const login = UseLogin();
+  
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
     setOpen(false);
   };
-
+  
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -211,7 +203,6 @@ export default function Login() {
                 login(email, password).then(
                   () => {
                     // useHistory push to chat
-                    console.log(email, password);
                     return;
                   },
                   error => {
@@ -219,6 +210,8 @@ export default function Login() {
                     setStatus(error);
                   }
                 );
+
+                
               }}
             >
               {({ handleSubmit, handleChange, values, touched, errors }) => (

@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 require('dotenv').config();
 const InitiateMongoServer = require("./config/db");
 const user = require("./routes/user");
-
+const cookieParser = require('cookie-parser')
 
 
 const PORT = 3001;
@@ -22,6 +22,7 @@ InitiateMongoServer();
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use("/auth", user);
 

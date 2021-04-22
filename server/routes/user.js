@@ -60,7 +60,7 @@ router.post(
 
         //TODO: Change the token to a cookie
         token = sign.sign(payload);
-        res.status(201).json({token: token, user: user});
+        res.status(201).cookie('token', token, {httpOnly: true}).json(user);
         } catch (err) {
             console.log(err.message);
             res.send(500,'Error in Saving');
@@ -101,7 +101,7 @@ router.post(
         };
         //TODO: Change the token to a cookie
         token = sign.sign(payload);
-        res.status(200).json({token: token, user: user});
+        res.status(200).cookie('token', token, {httpOnly: true}).json(user);
       } catch (e) {
         console.error(e);
         res.send(500, 'Server Error');

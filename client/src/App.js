@@ -8,14 +8,13 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import "./App.css";
 import  UserContext  from './UserContext';
+import Cookies from 'js-cookie';
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(localStorage.getItem("user"));
   const [object, setObject] = useState({
-    user: "default user",
-    token: null
+    user: null
   });
-
+  const [loggedIn, setLoggedIn] = React.useState(object.user);
   return (
     <UserContext.Provider  value={{ object, setObject }}>
       <MuiThemeProvider theme={theme}>

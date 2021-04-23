@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import UserContext from "../UserContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Cookies from 'js-cookie';
 
+
+/**
+ * Sends an async authentication request using username
+ * and password to register the user.
+ *
+ * @return {signup} The signup function.
+ */
 export default function UseRegister() {
     const history = useHistory();
     const { object, setObject } = useContext(UserContext);
-    const login = async (username, email, password) => {
+    const signup = async (username, email, password) => {
       const requestOptions = {
         method: 'POST'
       };
@@ -22,5 +29,5 @@ export default function UseRegister() {
     };
 
 
-    return login;
+    return signup;
   }

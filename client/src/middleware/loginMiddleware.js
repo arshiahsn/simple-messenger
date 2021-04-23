@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import UserContext from "../UserContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Cookies from 'js-cookie';
 
-
+/**
+ * Sends an async authentication request using username
+ * and password to authenticate the user.
+ *
+ * @return {login} The login function.
+ */
 export default function UseLogin() {
     const history = useHistory();
     const { object, setObject } = useContext(UserContext); 

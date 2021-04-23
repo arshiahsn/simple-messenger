@@ -8,34 +8,45 @@ import UserContext from "../UserContext";
 import UseDashboard from "../middleware/dashMiddleware";
 
 
+function OnLoadDash() {
+    const { object, setObject } = useContext(UserContext);
+    const history = useHistory();
+    const dash = UseDashboard();
+    React.useEffect(() =>  {
+      const token = localStorage.getItem("token");
+      if (!token) 
+        history.push("/signup");
+      else
+          dash();    
+    }, []);
+}
+
+
+
 export default function Dashboard() {
   const history = useHistory();
   const { object, setObject } = useContext(UserContext);
-  const dash = UseDashboard();
-  React.useEffect(() => {
-
-    const token = localStorage.getItem("token");
-    if (!token) history.push("/signup");
-    else
-      dash();
-  }, []);
-
-
-
-  return (
-    <>
-      {/* For testing purposes right now, ignore styling */}
-      <p>Dashboard</p>
-      <p>User: {JSON.stringify(object.user == null? "Loading..." : object.user.username)}</p>
-      <button
-        onClick={() => {
-          setObject({user: null});
-          localStorage.removeItem("token");
-          history.push("/login");
-        }}
-      >
-        Logout
-      </button>
-    </>
-  );
+  OnLoadDash();
+  if (object.user == null)
+    return <p>Loading...</p>;
+  else
+    return (
+      <>
+        {/* For testing purposes right now, ignore styling */}
+        <p>Dashboard</p>
+        <p>User: {JSON.stringify(object.user.username)}</p>
+        <button
+          onClick={() => {
+            setObject({user: null});
+            localStorage.removeItem("token");
+            history.push("/login");
+          }}
+        >
+          Logout
+        </button>
+        
+      </>
+    );
+  
+    
 }

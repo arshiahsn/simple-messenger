@@ -22,7 +22,9 @@ const useStyles = makeStyles(theme => ({
     minHeight: "100vh",
     "& .MuiInput-underline:before": {
       borderBottom: "1.2px solid rgba(0, 0, 0, 0.2)"
-    }
+    },
+    fontFamily: "'Open Sans'",
+    fontColor: "#3A8DFF"
   },
   welcome: {
     fontSize: 26,
@@ -99,10 +101,11 @@ const useStyles = makeStyles(theme => ({
     }
   },
   image: {
-    backgroundImage: "url(./images/bg-img.png)",
+    backgroundImage: 'linear-gradient(to right bottom, #3A8DFF, #86B9FF)',
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
+    opacity: 0.85
   },
   box: {
     padding: 24,

@@ -98,11 +98,11 @@ const useStyles = makeStyles(theme => ({
 
   },
   image: {
-    backgroundImage: "url(./images/bg-img.png)",
+    backgroundImage: 'linear-gradient(to right bottom, #3A8DFF, #86B9FF)',
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
-
+    opacity: 0.85
   },
   box: {
     padding: 24,

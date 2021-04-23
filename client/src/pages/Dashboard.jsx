@@ -6,10 +6,10 @@ import Paper from "@material-ui/core/Paper";
 import { useHistory } from "react-router-dom";
 import UserContext from "../UserContext";
 import UseDashboard from "../middleware/dashMiddleware";
-
+import { Redirect } from 'react-router-dom';
 
 function OnLoadDash() {
-    const { object, setObject } = useContext(UserContext);
+
     const history = useHistory();
     const dash = UseDashboard();
     React.useEffect(() =>  {
@@ -28,7 +28,7 @@ export default function Dashboard() {
   const { object, setObject } = useContext(UserContext);
   OnLoadDash();
   if (object.user == null)
-    return <p>Loading...</p>;
+    return <Redirect to="/login" />
   else
     return (
       <>

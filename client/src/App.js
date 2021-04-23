@@ -14,7 +14,7 @@ function App() {
   const [object, setObject] = useState({
     user: null
   });
-  const [loggedIn, setLoggedIn] = React.useState(object.user);
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <UserContext.Provider  value={{ object, setObject }}>
       <MuiThemeProvider theme={theme}>

@@ -22,16 +22,12 @@ const useStyles = makeStyles(theme => ({
     minHeight: "100vh",
     "& .MuiInput-underline:before": {
       borderBottom: "1.2px solid rgba(0, 0, 0, 0.2)"
-    },
-    fontFamily: "'Open Sans'",
-    fontColor: "#3A8DFF"
+    }
   },
   welcome: {
     fontSize: 26,
     paddingBottom: 20,
-    color: "#000000",
-    fontWeight: 700,
-    fontFamily: "'Open Sans'"
+    fontWeight: 500
   },
   heroText: {
     fontSize: 26,

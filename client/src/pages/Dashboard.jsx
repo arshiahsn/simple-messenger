@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../UserContext";
 import useDashboard from "../middleware/useDashboard";
 import { Redirect } from 'react-router-dom';
-
+import SearchAppBar from 'components/SearchAppBar'
 
 
 
@@ -22,7 +22,7 @@ export default function Dashboard() {
     return (
       <>
         {/* For testing purposes right now, ignore styling */}
-        <p>Dashboard</p>
+        <SearchAppBar/>
         <p>User: {JSON.stringify(object.user.username)}</p>
         <button
           onClick={() => {

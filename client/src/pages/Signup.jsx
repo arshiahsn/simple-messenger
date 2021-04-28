@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -14,6 +14,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import UserContext from "../UserContext";
+import register from "../middleware/singupMiddleware";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,9 +27,7 @@ const useStyles = makeStyles(theme => ({
   welcome: {
     fontSize: 26,
     paddingBottom: 20,
-    color: "#000000",
-    fontWeight: 700,
-    fontFamily: "'Open Sans'"
+    fontWeight: 500
   },
   heroText: {
     fontSize: 26,
@@ -56,17 +56,28 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     bgcolor: "background.paper",
     minHeight: "100vh",
-    paddingTop: 23
+    paddingTop: 23,
+    "@media (max-width: 320px)": {
+      paddingTop: 10
+    },
   },
   accBtn: {
     width: 170,
-    height: 54,
     borderRadius: 5,
     filter: "drop-shadow(0px 2px 6px rgba(74,106,149,0.2))",
     backgroundColor: "#ffffff",
     color: "#3a8dff",
     boxShadow: "none",
-    marginRight: 35
+    marginRight: 35,
+    "@media (max-width: 320px)": {
+      height: 30,
+      width: 70,
+      fontSize: 10
+    },
+    "@media (min-width: 320px)": {
+      height: 54,
+      whiteSpace: 170
+    }
   },
   noAccBtn: {
     fontSize: 14,
@@ -74,13 +85,23 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 400,
     textAlign: "center",
     marginRight: 21,
-    whiteSpace: "nowrap"
+    "@media (max-width: 320px)": {
+      fontSize: 10
+    },
+    "@media (max-width: 600px)": {
+      whiteSpace: "wrap"
+      
+    },
+    "@media (min-width: 600px)": {
+      whiteSpace: "no-wrap"
+    }
   },
   image: {
-    backgroundImage: "url(./images/bg-img.png)",
+    backgroundImage: 'linear-gradient(to right bottom, #3A8DFF, #86B9FF)',
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
+    opacity: 0.85
   },
   box: {
     padding: 24,
@@ -93,8 +114,18 @@ const useStyles = makeStyles(theme => ({
     margin: "auto"
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    "@media (max-width: 320px)": {
+      width: "70%"
+    },
+    "@media (max-width: 600px)": {
+      width: "90%"
+      
+    },
+    "@media (min-width: 600px)": {
+      width: "100%"
+    }
   },
   label: { fontSize: 19, color: "rgb(0,0,0,0.4)", paddingLeft: "5px" },
   submit: {
@@ -106,7 +137,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: 49,
     fontSize: 16,
     backgroundColor: "#3a8dff",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    "@media (max-width: 320px)": {
+      fontSize: 10,
+      width: "50%",
+      height: "50%",
+    }
   },
   inputs: {
     marginTop: ".8rem",
@@ -116,27 +152,13 @@ const useStyles = makeStyles(theme => ({
   link: { textDecoration: "none", display: "flex", flexWrap: "nowrap" }
 }));
 
-function useRegister() {
-  const history = useHistory();
 
-  const login = async (username, email, password) => {
-    console.log(email, password);
-    const res = await fetch(
-      `/auth/signup?username=${username}&email=${email}&password=${password}`
-    ).then(res => res.json());
-    console.log(res);
-    localStorage.setItem("user", res.user);
-    localStorage.setItem("token", res.token);
-    history.push("/dashboard");
-  };
-  return login;
-}
 
 export default function Register() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-
-  const register = useRegister();
+  const { object, setObject } = useContext(UserContext);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
@@ -146,9 +168,10 @@ export default function Register() {
   const history = useHistory();
 
   React.useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) history.push("/dashboard");
+    const user = object.user;
+    if (user != null) history.push("/dashboard");
   }, []);
+  
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -219,7 +242,6 @@ export default function Register() {
                 register(username, email, password).then(
                   () => {
                     // useHistory push to chat
-                    console.log(email, password);
                     return;
                   },
                   error => {

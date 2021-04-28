@@ -75,7 +75,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/arshiahsn/Emaily.git
+   git clone https://github.com/arshiahsn/simple-messenger.git
    ```
 2. Download and Install NodeJS
 3. Run NPM install

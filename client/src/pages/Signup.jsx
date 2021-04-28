@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import UserContext from "../UserContext";
-import UseRegister from "../middleware/signupMiddleware";
+import register from "../middleware/singupMiddleware";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -159,7 +159,6 @@ export default function Register() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const { object, setObject } = useContext(UserContext);
-  const register = UseRegister();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;

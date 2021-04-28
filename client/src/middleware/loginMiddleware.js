@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
  *
  * @return {login} The login function.
  */
-export default function UseLogin() {
+function login() {
     const history = useHistory();
     const { object, setObject } = useContext(UserContext); 
     const login = async (email, password) => {
@@ -19,7 +19,6 @@ export default function UseLogin() {
       const res = await fetch(
         `/auth/login?email=${email}&password=${password}`
       , requestOptions).then(res => res.json());
-      console.log(res);
       const userObject = {
         user: res
     }
@@ -31,6 +30,5 @@ export default function UseLogin() {
     };
 
 
-    return login;
   }
-
+  export default login;

@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import UserContext from "../UserContext";
-import UseLogin from "../middleware/loginMiddleware"
+import login from "../middleware/loginMiddleware"
 
 const useStyles = makeStyles(theme => ({
   
@@ -162,7 +162,7 @@ export default function Login() {
     if (user != null) history.push("/dashboard");
   }, []);
 
-  const login = UseLogin();
+  useLogin();
   
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;

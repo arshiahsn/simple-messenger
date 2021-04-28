@@ -5,28 +5,17 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import { useHistory } from "react-router-dom";
 import UserContext from "../UserContext";
-import UseDashboard from "../middleware/dashMiddleware";
+import useDashboard from "../middleware/useDashboard";
 import { Redirect } from 'react-router-dom';
 
-function OnLoadDash() {
 
-    const history = useHistory();
-    const dash = UseDashboard();
-    React.useEffect(() =>  {
-      const token = localStorage.getItem("token");
-      if (!token) 
-        history.push("/signup");
-      else
-          dash();    
-    }, []);
-}
 
 
 
 export default function Dashboard() {
   const history = useHistory();
   const { object, setObject } = useContext(UserContext);
-  OnLoadDash();
+  useDashboard();
   if (object.user == null)
     return <Redirect to="/login" />
   else

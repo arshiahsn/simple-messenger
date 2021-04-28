@@ -5,37 +5,37 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import { useHistory } from "react-router-dom";
 import UserContext from "../UserContext";
-import UseDashboard from "../middleware/dashMiddleware";
+import useDashboard from "../middleware/useDashboard";
+import { Redirect } from 'react-router-dom';
+
+
+
 
 
 export default function Dashboard() {
   const history = useHistory();
   const { object, setObject } = useContext(UserContext);
-  const dash = UseDashboard();
-  React.useEffect(() => {
-
-    const token = localStorage.getItem("token");
-    if (!token) history.push("/signup");
-    else
-      dash();
-  }, []);
-
-
-
-  return (
-    <>
-      {/* For testing purposes right now, ignore styling */}
-      <p>Dashboard</p>
-      <p>User: {JSON.stringify(object.user == null? "Loading..." : object.user.username)}</p>
-      <button
-        onClick={() => {
-          setObject({user: null});
-          localStorage.removeItem("token");
-          history.push("/login");
-        }}
-      >
-        Logout
-      </button>
-    </>
-  );
+  useDashboard();
+  if (object.user == null)
+    return <Redirect to="/login" />
+  else
+    return (
+      <>
+        {/* For testing purposes right now, ignore styling */}
+        <p>Dashboard</p>
+        <p>User: {JSON.stringify(object.user.username)}</p>
+        <button
+          onClick={() => {
+            setObject({user: null});
+            localStorage.removeItem("token");
+            history.push("/login");
+          }}
+        >
+          Logout
+        </button>
+        
+      </>
+    );
+  
+    
 }

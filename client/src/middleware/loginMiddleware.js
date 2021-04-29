@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
  *
  * @return {login} The login function.
  */
-function login() {
+function useLogin(email, password) {
     const history = useHistory();
     const { object, setObject } = useContext(UserContext); 
     const login = async (email, password) => {
@@ -29,6 +29,7 @@ function login() {
   
     };
 
-
+    return login;
   }
-  export default login;
+
+  export default useLogin;

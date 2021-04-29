@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
  *
  * @return {signup} The signup function.
  */
-function register() {
+function useRegister() {
     const history = useHistory();
     const { object, setObject } = useContext(UserContext);
     const signup = async (username, email, password) => {
@@ -31,4 +31,4 @@ function register() {
 
   }
 
-  export default register;
+  export default useRegister;

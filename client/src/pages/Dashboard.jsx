@@ -7,9 +7,10 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../UserContext";
 import useDashboard from "../middleware/useDashboard";
 import { Redirect } from 'react-router-dom';
-import SearchAppBar from 'components/SearchAppBar'
-
-
+import SearchAppBar from '../components/SearchAppBar'
+import UserList from '../components/UserList'
+import ChatBox from '../components/ChatBox'
+import Container from '@material-ui/core/Container';
 
 
 export default function Dashboard() {
@@ -23,7 +24,10 @@ export default function Dashboard() {
       <>
         {/* For testing purposes right now, ignore styling */}
         <SearchAppBar/>
-        <p>User: {JSON.stringify(object.user.username)}</p>
+        <Container>
+          <UserList/>
+          <ChatBox/>
+        </Container>
         <button
           onClick={() => {
             setObject({user: null});

@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import UserContext from "../UserContext";
-import login from "../middleware/loginMiddleware"
+import useLogin from "../middleware/loginMiddleware"
 
 const useStyles = makeStyles(theme => ({
   
@@ -156,13 +156,14 @@ export default function Login() {
   const [open, setOpen] = React.useState(true);
   const { object, setObject } = useContext(UserContext);
   const history = useHistory();
+  const login = useLogin();
 
   React.useEffect(() => {
     const user = object.user;
     if (user != null) history.push("/dashboard");
   }, []);
 
-  useLogin();
+ 
   
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;

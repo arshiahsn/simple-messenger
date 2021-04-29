@@ -14,7 +14,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: '36ch',
+    maxHeight: 200,
     backgroundColor: theme.palette.background.paper,
+    overflow: 'auto'
   },
   inline: {
     display: 'inline',
@@ -25,11 +27,13 @@ export default function UserList() {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const {users, setUsers, selectedUser, setSelectedUser} = useContext(AllUsersContext);
-  const userList = users.list;
+  const userList = users;
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
     setSelectedUser(userList[index]);
+
   };
+  
   
   return (
     <List component="nav" className={classes.root}>
@@ -55,9 +59,9 @@ export default function UserList() {
                         className={classes.inline}
                         color="textPrimary"
                     >
-                        {user.msgHistory[user.msgHistory.length-1]}
+                        {user.msgHistory[user.msgHistory.length-1].msg}
                     </Typography>
-                    {user.msgHistory[-1]}
+                    
                     </React.Fragment>
                 }
                 />

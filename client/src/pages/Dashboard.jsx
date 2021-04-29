@@ -11,6 +11,7 @@ import SearchAppBar from '../components/SearchAppBar'
 import UserList from '../components/UserList'
 import ChatBox from '../components/ChatBox'
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 
 export default function Dashboard() {
@@ -24,10 +25,10 @@ export default function Dashboard() {
       <>
         {/* For testing purposes right now, ignore styling */}
         <SearchAppBar/>
-        <Container>
+        <Grid container>
           <UserList/>
           <ChatBox/>
-        </Container>
+        </Grid>
         <button
           onClick={() => {
             setObject({user: null});

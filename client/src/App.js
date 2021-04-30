@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Logout from "./pages/Logout";
 import "./App.css";
 import  UserContext  from './UserContext';
 import Cookies from 'js-cookie';
@@ -54,6 +55,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/logout" component={Logout} />
             <Route exact path="/">
               <Redirect to="/signup" />
             </Route>

@@ -17,7 +17,8 @@ const action = (timestamp) => (
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      maxWidth: 500,
+      width: '100%',
+      height: '100%',
       '& > * + *': {
         marginTop: theme.spacing(2),
       },

@@ -9,12 +9,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import AllUsersContext from '../AllUsersContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import DotBadge from '../components/DotBadge'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: '36ch',
-    maxHeight: 200,
+    height: '100%',
     backgroundColor: theme.palette.background.paper,
     overflow: 'auto'
   },
@@ -47,7 +48,7 @@ export default function UserList() {
             onClick={(event) => handleListItemClick(event, index)}
             >
                 <ListItemAvatar>
-                <Avatar alt={user.username} src={user.avatar} />
+                <DotBadge user={user.username} isOnline={false} src={user.avatar}/>
                 </ListItemAvatar>
                 <ListItemText
                 primary={user.username}

@@ -8,11 +8,12 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import UserContext from '../UserContext';
-import DotBadge from '../components/DotBadge'
+import DotBadge from '../components/DotBadge';
+import AppDrawer from '../components/Drawer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -71,20 +72,9 @@ export default function SearchAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor: '#03a9f4'}}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <DotBadge />
-          <Typography className={classes.title} variant="h6" noWrap>
-          {object.user.username}
-          </Typography>
+          <AppDrawer/>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

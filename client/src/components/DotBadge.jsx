@@ -5,6 +5,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import Typography from '@material-ui/core/Typography';
 import UserContext from '../UserContext';
 import LetterAvatars from './LetterAvatars';
+import {theme} from '../themes/theme'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,16 +13,23 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  margin: {
+    margin: theme.spacing.unit * 2
+  },
+  customBadge: {
+    backgroundColor: "#00AFD7",
+    color: "white"
+  }
 }));
 
-export default function DotBadge() {
+export default function DotBadge(props) {
   const classes = useStyles();
-  const {object, setObject} = useContext(UserContext);
+  
 
   return (
     <div className={classes.root}>
-      <Badge color="secondary" variant="dot">
-        <LetterAvatars user={object.user}/>
+      <Badge color={props.isOnline?"secondary":"primary"} variant="dot">
+        <LetterAvatars alt={props.user} src={props.src} />
       </Badge>
     </div>
   );

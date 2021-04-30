@@ -27,7 +27,7 @@ export default function LetterAvatars(props) {
   //TODO: Add random color to avatar
   return (
     <div className={classes.root}>
-      <Avatar>{props.user.username}</Avatar>
+      <Avatar>{props.alt}</Avatar>
     </div>
   );
 }

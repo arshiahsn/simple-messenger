@@ -16,7 +16,7 @@ function App() {
   const userList = 
     [
       {
-        id: 1,
+        id: '1',
         username: 'Ali Connor',
         msgHistory: [
           {msg: 'Hi!', rcv: true, timestamp: new Date('December 17, 2020 03:24:00')}, 
@@ -28,13 +28,40 @@ function App() {
       }
     ,
       {
-        id: 2,
+        id: '2',
         username: 'Joana Baez',
         msgHistory: [
           {msg: 'Hi there!', rcv: true, timestamp: new Date('December 17, 2020 05:24:00')}, 
           {msg: 'How\'re you doing?', rcv: true, timestamp: new Date('December 17, 2020 05:24:00')},
           {msg: 'Not too bad! Yourself?', rcv: false, timestamp: new Date('December 17, 2020 05:26:00')},
           {msg: 'Down for a hike on Sunday?', rcv: true, timestamp: new Date('December 17, 2020 05:27:03')}
+        ],
+        avatar: 'some_url_2'
+      }
+      ,
+      {
+        id: '3',
+        username: 'Andrea Johanson',
+        msgHistory: [
+          {msg: 'Heeey!', rcv: false, timestamp: new Date('December 17, 2020 05:24:00')}, 
+          {msg: 'Hey!', rcv: true, timestamp: new Date('December 17, 2020 05:24:00')},
+          {msg: 'How\s everything?', rcv: false, timestamp: new Date('December 17, 2020 05:26:00')},
+          {msg: 'Goood! Yourself?', rcv: true, timestamp: new Date('December 17, 2020 05:27:03')}
+        ],
+        avatar: 'some_url_2'
+      }
+      ,
+      {
+        id: '4',
+        username: 'Isac Fields',
+        msgHistory: [
+          {msg: 'Hi there!', rcv: true, timestamp: new Date('December 17, 2020 05:24:00')}, 
+          {msg: 'Hello!', rcv: false, timestamp: new Date('December 17, 2020 05:24:00')},
+          {msg: 'Sup?', rcv: false, timestamp: new Date('December 17, 2020 05:26:00')},
+          {msg: 'Not much. You?', rcv: true, timestamp: new Date('December 17, 2020 05:27:03')},
+          {msg: 'Busy!', rcv: false, timestamp: new Date('December 17, 2020 05:27:03')},
+          {msg: 'How about yourself?', rcv: false, timestamp: new Date('December 17, 2020 05:27:03')}
+          ,{msg: 'Same old same old!', rcv: true, timestamp: new Date('December 17, 2020 05:27:03')}
         ],
         avatar: 'some_url_2'
       }

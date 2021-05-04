@@ -18,7 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import UserContext from '../UserContext';
-import DotBadge from '../components/DotBadge'
+import DotBadge from './DotBadge'
 import useLogout from '../middleware/useLogout';
 import { Redirect } from 'react-router-dom';
 import { Link, useHistory } from "react-router-dom";

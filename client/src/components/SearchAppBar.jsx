@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,10 +9,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import UserContext from '../UserContext';
 import DotBadge from '../components/DotBadge';
-import AppDrawer from '../components/Drawer';
+import AppDrawer from './AppDrawer';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import AllUsersContext from '../AllUsersContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
     flexGrow: 1
   },
   menuButton: {
@@ -24,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+  toolbar: {
+    display: 'flex',
+    justify: 'flex-end'
   },
   search: {
     position: 'relative',
@@ -38,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       width: 'auto',
     },
+    
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -69,16 +78,24 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
   const { object, setObject }  = useContext(UserContext);
+  const {searchUsers, setSearchUsers} = useContext(AllUsersContext);
+  const [search, setSearch] = useState('');
+  const handleSearch = (event) => {
+    
+      setSearch(event.target.value);
+      setSearchUsers(event.target.value);
+   
+  }
 
   return (
-    <div className={classes.root}>
+    <Grid container className={classes.root}>
       <AppBar position="static" style={{backgroundColor: '#03a9f4'}}>
         <Toolbar>
           <AppDrawer/>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <Container className={classes.search}>
+            <Container className={classes.searchIcon}>
               <SearchIcon />
-            </div>
+            </Container>
             <InputBase
               placeholder="Search…"
               classes={{
@@ -86,10 +103,12 @@ export default function SearchAppBar() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              value={search}
+              onChange={handleSearch}
             />
-          </div>
+          </Container>
         </Toolbar>
       </AppBar>
-    </div>
+    </Grid>
   );
 }

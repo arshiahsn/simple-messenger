@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -6,6 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
 import Icon from '@material-ui/core/Icon';
+import AllUsersContext from '../AllUsersContext';
+import { PinDropSharp, SettingsInputAntennaOutlined } from '@material-ui/icons';
+ 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     alignItems: "flex-start",
     justifyContent: "space-between",
-    flexDirection: "row"
+    flexDirection: "row",
+    
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -23,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1),
+    backgroundColor: "#757575",
+    width: 100,
+    height: 40
   },
   input: {
     display: 'none',
@@ -35,16 +43,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ChatTextField() {
+export default function ChatTextField(props) {
   const classes = useStyles();
+  const {users, setUsers, selectedUser, setSelectedUser} = useContext(AllUsersContext);
+  const [textFieldValue, setTextFieldValue] = useState('');
+  const {toggleReload} = props;
+  
+  const handleSendMessage = () => {
+    const newUsers = users;
+    const id = selectedUser;
+    console.log(textFieldValue);
+    newUsers.find(user=>user.id == id).msgHistory.push({msg: textFieldValue, rcv: false, timestamp: new Date(Date.now())});
+    setUsers(newUsers);
+    setTextFieldValue('');
+    toggleReload();
+  };
+  const handleTextFieldChange = (e) => {
+    setTextFieldValue(e.target.value);
+};
 
   return (
     <div className={classes.root}>
       <TextField
           id="outlined-full-width"
-          label="Text"
+          label=""
           style={{ margin: 8 }}
-          placeholder=""
+          placeholder="Message"
           helperText=""
           fullWidth
           multiline
@@ -55,6 +79,8 @@ export default function ChatTextField() {
           }}
           variant="outlined"
           className={classes.textField}
+          onChange={handleTextFieldChange}
+          value={textFieldValue}
         />
         <div className={classes.buttons}>
             <input
@@ -65,20 +91,20 @@ export default function ChatTextField() {
                 type="file"
             />
             <label htmlFor="contained-button-file">
-                <Button 
+                <Button
+                size="medium" 
                 className={classes.button}
                 variant="contained" 
-                color="primary" 
                 component="span">
-                Upload
+                Send File
                 </Button>
             </label>
             <Button
+                size="medium"
                 variant="contained"
-                color="primary"
                 className={classes.button}
                 endIcon={<Icon>send</Icon>}
-            >
+                onClick={handleSendMessage}>
                 Send
             </Button>
         </div>

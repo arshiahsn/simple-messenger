@@ -6,7 +6,9 @@ const AllUsersContext = React.createContext({
   },
   setUsers: () => {},
   selectedUser: null,
-  setSelectedUser: () => null
+  setSelectedUser: () => null,
+  searchUsers: null,
+  setSearchUsers: () => null
 });
 
 

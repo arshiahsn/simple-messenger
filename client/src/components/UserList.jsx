@@ -14,9 +14,8 @@ import DotBadge from '../components/DotBadge'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: '36ch',
     height: '100%',
-    backgroundColor: theme.palette.background.paper,
+    maxHeight: 400,
     overflow: 'auto'
   },
   inline: {
@@ -27,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
 export default function UserList() {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const {users, setUsers, selectedUser, setSelectedUser} = useContext(AllUsersContext);
+  const {users, setSelectedUser, searchUsers} = useContext(AllUsersContext);
   const userList = users;
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-    setSelectedUser(userList[index]);
+    setSelectedUser(userList[index].id);
 
   };
   
@@ -41,7 +40,7 @@ export default function UserList() {
       {userList.map((user, index)=>
         <div>
             <ListItem
-            key={user.id.toString()}
+            key={user.id}
             alignItems="flex-start"
             button
             selected={selectedIndex === index}

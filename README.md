@@ -14,7 +14,7 @@
     <a href="https://github.com/arshiahsn/simple-messenger"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/arshiahsn/simple-messenger">View Demo</a>
+    <a href="https://github.com/arshiahsn/arshiahsn.github.io/blob/master/simple-messenger.gif">View Demo</a>
     ·
     <a href="https://github.com/arshiahsn/simple-messenger/issues">Report Bug</a>
     ·
